@@ -1,0 +1,191 @@
+package accountproject;
+
+// two imports needed for date and time
+import java.time.format.*;
+import java.time.*;
+// import standard exception error text
+import java.text.ParseException;
+// import EVERYTHING!
+import java.util.*;
+
+public class Account {
+	
+	private static int id = 0;
+	private static double balance = 0;
+	private static double annualInterestRate = 0;
+	private static ZonedDateTime dateCreated;
+	private static double MonthlyInterestRate = annualInterestRate/12;
+	
+	public Account()
+	{
+		// empty constructor
+	}
+	
+	/**
+	 * @param id
+	 * @param balance
+	 * @param annualInterestRate
+	 * @param dateCreated
+	 * regular constructors
+	 */
+	
+	public Account(int id, double balance, double annualInterestRate, ZonedDateTime dateCreated) {
+		super();
+		Account.id = 0;
+		Account.balance = 0;
+		Account.annualInterestRate = 4.5;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		Account.id = id;
+	}
+
+	public static double getBalance(double d) {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		Account.balance = balance;
+	}
+
+	public double getAnnualInterestRate() {
+		return annualInterestRate;
+	}
+
+	public void setAnnualInterestRate(double annualInterestRate) {
+		Account.annualInterestRate = annualInterestRate;
+	}
+
+	public static ZonedDateTime ConvertStringToDate(String dateNow) {
+	    try
+	{
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+	    ZonedDateTime date = ZonedDateTime.parse(dateNow, formatter);
+    
+	    return date;
+	}
+	 catch (DateTimeParseException e)
+	{
+	    System.out.println(e);
+	}
+	    ZonedDateTime date = null;
+	    return date;
+	}
+	
+	public static double getMonthlyInterestRate(double annualInterestRate2) {
+		
+		double temp = annualInterestRate2/12;
+		
+		MonthlyInterestRate = temp;
+		
+		return MonthlyInterestRate;
+	}
+	
+	public static double getMonthlyInterest(double newBalance2) {
+		
+		double temp = 100/MonthlyInterestRate;
+		
+		double temp2 = newBalance2/temp;
+		
+		double temp3 = newBalance2 + temp2;
+		
+		newBalance2 = temp3;
+		
+		return temp2;
+	}
+	
+	public static double deposit(double balance, double deposit) {
+		
+		double temp = balance + deposit;
+		
+		balance = temp;
+		
+		return balance;
+	}
+
+	public static double withdrawal(double balance, double withdrawal) {
+		
+		double temp = balance - withdrawal;
+		
+		balance = temp;
+		
+		return balance;
+	}
+	
+		public static void main(String[] args) throws ParseException {
+			
+			// establish a scanner and set example values
+			Scanner stdin = new Scanner(System.in);
+	        id = 1122;
+	        balance = 20000;
+	        MonthlyInterestRate = .375;
+	        double withdrawal = 2500;
+	        double deposit = 3000;
+	        
+	        double balanceExp = deposit(balance,deposit);
+	        balanceExp = withdrawal(balanceExp,withdrawal);
+	        double balanceExp2 = getMonthlyInterest(balanceExp);
+	        double monthlyInterest = balanceExp2;
+	        
+	        String dateExp = "Fri Oct 06 16:10:59 GMT 2017";
+	        dateCreated = ConvertStringToDate(dateExp);
+
+	        System.out.println("SAMPLE: Account ID " + id + " with a balance of $" + balanceExp
+	                 + ",\nhas accrued $" + monthlyInterest + " in interest and was opened on " 
+	        		+ dateCreated + ".");
+
+	        System.out.println("Please enter the ID number:");
+
+	        // get the id number input
+	        id = stdin.nextInt();
+	        stdin.nextLine();
+
+	        System.out.println("Typically, the original balance will be $20,000.00.\nPlease enter the balance:");
+
+	        // get the starting balance input
+	        balance = stdin.nextInt();
+	        stdin.nextLine();
+
+	        double newBalance = balance;
+
+	        Account.getBalance(20000.00);
+
+	        System.out.println("Please enter the deposit amount:");
+
+	        // ensure deposit is set to 0 before getting input
+	        deposit = 0.00;
+
+	        // get the deposit amount from input
+	        deposit = stdin.nextDouble();
+	        stdin.nextLine();
+
+	        newBalance = deposit(balance, deposit);
+
+	        System.out.println("Please enter the withdrawal amount:");
+
+	        // ensure withdrawal is set to 0 before getting input
+	        withdrawal = 0.00;
+
+	        // get the deposit amount from input
+	        withdrawal = stdin.nextDouble();
+	        stdin.nextLine();
+
+	        double newBalance2 = withdrawal(newBalance, withdrawal);
+	        double newBalance3 = getMonthlyInterest(newBalance2);
+	        double MonthlyInterest = newBalance3;
+
+	        print(id, newBalance2, MonthlyInterest, dateCreated);
+	        
+	        stdin.close();
+	    }
+
+	    public static void print(int id, double newBalance2, double MonthlyInterest, ZonedDateTime dateCreated2)
+	    {
+	            System.out.println("To verify: the Account ID is " + id + " with a balance of $" + newBalance2
+	                    + ",\nhas accrued $" + MonthlyInterest + " in interest, and was opened on " + dateCreated2 + ".");
+	    }
+}

@@ -1,0 +1,115 @@
+package creditcardvalidation;
+
+import java.util.Scanner;  // needed for input
+
+public class creditcardverification {	// main public class
+
+	public static void main(String[] args){	// main method
+		
+    int count = 0;	// initialize local variable count
+    Boolean loop = true;  
+    Scanner input = new Scanner(System.in);	// get input from user
+    long cardNumber;	// main variable
+    long cardNumber2;	// secondary variable
+    long array[];	// array based on input from user
+    int sizemin = 12;	// exclusive bounds for size of input
+	int sizemax = 17;	// exclusive bounds for size of input
+    		
+    do
+    {
+    	System.out.print("\nEnter your Credit Card Number : \n");
+    	cardNumber = input.nextLong();	// get the card number from the user
+     
+    	count = (int)(Math.log10(cardNumber)+1);	// get the length of the number for the array
+    	
+    	if (count < sizemin || sizemax < count) // test if input is outside the needed size to be a valid number
+		{
+			System.out.println("That is not a valid credit card number, please enter a valid number.");
+			cardNumber = input.nextLong();	// go back to do statement
+		}
+      
+    	array = new long [count];	// initialize array to be as long as the number of digits
+  
+    	cardNumber2 = cardNumber;	// keep a backup copy of the original number
+    	
+    	for (int i = 0; i < count; i++) {	// creates the array and puts the numbers in it in order
+	   		array[i] = cardNumber % 10;
+	   		cardNumber = cardNumber / 10;
+   		}
+    	
+   
+   		if(array[count-1] == 4 || array[count-1] == 5 || array [count-1] == 6 || (array[count-1] == 3 && array[count - 2] == 7))
+   		{
+	   		loop = false;	// criteria for first two digits met
+   		}
+   		else
+   		{
+   			System.out.print("The number you entered was not valid. Try again.\n ");	// loop continues
+   		}
+   		
+   }
+    while(loop == true);
+    input.close();
+    
+    
+	String Visa = ("The Visa card number you entered is:");
+	String Master = ("The Mastercard number you entered is:");
+	String Ammex = ("The American Express card number you entered is:");
+	String Discover = ("The Discover card number you entered is:");
+	String Error = ("That is not valid input, please check the card number and enter again.");
+
+	if (array[count - 1] == 4) {
+		System.out.println(Visa);
+	}
+	else if (array[count - 1] == 5) {
+		System.out.println(Master);
+	}
+	else if (array[count - 1] == 3 && array[count - 2] == 7) {
+		System.out.println(Ammex);
+	}
+	else if (array[count - 1] == 6) {
+		System.out.println(Discover);
+	}
+	else {
+		System.out.println(Error);
+	}
+	
+	for(int i = (count - 1); i >= 0; i--)	// show the array in order
+	{
+		System.out.print(array[i]);
+	}
+
+	Boolean Luhntest = (luhnTest(Long.toString(cardNumber2)));	// call to Luhn's test using copied number
+	
+	if(Luhntest == true)	// displays message based on Luhn's test results
+	{
+		System.out.print("\nThis is a valid credit card number");
+	}
+	else
+	{
+		System.out.print("\nThis is not a valid credit card number");
+	}
+	
+}
+
+public static boolean luhnTest(String ccNumber) {	// Luhn's algorithm
+	int sum = 0;
+	boolean alternate = false;
+	for (int i = ccNumber.length() - 1; i >= 0; i--)
+	{
+		int n = Integer.parseInt(ccNumber.substring(i, i + 1));
+		if (alternate)
+		{
+			n *= 2;
+			if (n > 9)
+			{
+				n = (n % 10) + 1;
+			}
+		}
+		sum += n;
+		alternate = !alternate;
+	}
+	return (sum % 10 == 0);
+}
+
+}
