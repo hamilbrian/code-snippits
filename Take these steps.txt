@@ -1,0 +1,13 @@
+make your changes
+
+git status
+
+git add *
+
+git pull
+
+git commit -m "message here"
+
+git push
+
+git status
