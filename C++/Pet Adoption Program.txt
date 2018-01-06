@@ -1,0 +1,99 @@
+#include <iostream>
+	// allows input and output
+#include <string>		
+	// allows strings
+#include <cstdlib>	
+	// needed for random number generator
+#include <ctime>	
+	// needed for time
+#include <cmath>	
+	// needed for math functions
+#include <iomanip>	
+	// allows manipulation of input and output
+
+using namespace std;
+
+int main ()
+{
+	unsigned seed = time (0); 
+		// system time
+	srand(seed);	
+		// random number generator
+	string name;	
+		// declare users name
+	string pet;		
+		// declare pets name
+	string type;	
+		// declare type of pet
+	
+	cout << setprecision(5) << showpoint;
+		// show decimals
+	
+	double a;		
+		// declare variable for pet weight
+	
+	const double b = 100.00;	
+		// declare base addoption fee
+	
+	const double t = .045;	
+		// set tax rate
+
+	const double c = .50;	
+		// needed for calculating charge based on weight
+	
+	const int MIN_VALUE = 0.00;
+		// minimum for medical cost
+
+	const int MAX_VALUE = 10.00;
+		// minimum for medical cost
+	
+	cout << "Please enter your full name.\n";
+	getline(cin, name);		
+		// get full name of user
+
+	cout << "\nPlease enter the name of the pet that you would like to adopt.\n";
+	getline(cin, pet);	
+		// get name of pet
+
+	cout << "\nWhat is the weight of the pet in pounds?\n";
+	cin >> a;			
+		// get weight of pet
+
+	cout << "\nPlease tell us the type of pet you are adopting today (cat, dog, bird):\n";
+	cin >> type;		
+		// get type of pet
+	
+	cout << "\nThank you for asking about adopting a " << type << " at our animal hosptial!\n";
+	
+	cout << name << ", the cost to adopt your new " << type << " " << pet << ", that weighs " << setprecision(4) << a << " pounds, is as follows: \n";
+	cout << "\n--------------------------------";
+	cout << "\nInitial cost:\t$  " << right << setprecision(5) << setw(10) << b;
+	
+	double m = (rand() % (MAX_VALUE - MIN_VALUE)) + 20.00;
+	
+	cout << "\nMedical fee:\t$  " << setprecision(4) << setw(10) << m ;
+	
+	double d = (a * c);	
+		// get total weight cost
+	
+	cout << "\nWeight fee:\t$  " << setprecision(3) << setw(10) << d;
+	cout<< "\n--------------------------------";
+	
+	double s = (b + d + m);	
+		// base fee plus weight cost
+
+	cout << "\nSubtotal:\t$  " << setprecision(5) << setw(10) << s;
+	
+	double e = (s * t);	
+		// tax on subtotal
+	
+	cout << "\nTax:\t\t$  " << setprecision(3) << setw(10) << e;
+	cout<< "\n--------------------------------";
+	
+	double z = (s + e);	
+		// tax plus subtotal
+	
+	cout << "\nTotal:\t\t$  " << setprecision(5) << setw(10) << (s + e);
+	
+	return 0;
+}

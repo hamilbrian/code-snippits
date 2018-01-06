@@ -1,0 +1,26 @@
+You might be tempted to just start doing stuff, but you should
+tell Git who you are first:
+
+git config --global uers.name "Your name"
+git config --global uers.email your@email.com
+
+Create a new local repository:
+
+git init
+
+To clone a directory, just hit the button on the Git page that 
+copies the pathfile, then go to the console and type:
+
+git clone the pathfile(http......)
+
+to update your git files from the respository:
+
+git pull
+
+Add files to your repository that you made locally
+
+git add (file name) or (* for all files in current directory)
+
+
+
+

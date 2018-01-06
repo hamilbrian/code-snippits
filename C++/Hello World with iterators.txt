@@ -1,0 +1,17 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+	int number = 0;
+	cout << "How many times do you want to see the message?\n";
+	cin >> number
+
+	for(int i = 0; i < number; i++)
+	{
+		cout << "Hello World";
+	}
+
+	return 0;
+}
