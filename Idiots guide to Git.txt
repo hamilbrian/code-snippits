@@ -13,13 +13,38 @@ copies the pathfile, then go to the console and type:
 
 git clone the pathfile(http......)
 
-to update your git files from the respository:
+To update your git files from the respository:
 
 git pull
 
-Add files to your repository that you made locally
+git merge <branch to bring into yours>
+
+Add files to your repository that you made locally:
 
 git add (file name) or (* for all files in current directory)
+
+To commit your changes:
+
+git commit -m "always leave a message talking about your changes"
+
+git commit -a (this will add everything, including yours added files)
+
+Push your changes to the repository, it's a best practice to have a
+dev or working branch and only commit to the master file when necessary:
+
+git push origin "branch name here"
+
+Check your status with the repository:
+
+git status
+
+Best practice, make a new branch:
+
+git checkout -b <name your branch>
+
+git checkout <switch branches>
+
+git branch (this will list all the branches)
 
 
 
